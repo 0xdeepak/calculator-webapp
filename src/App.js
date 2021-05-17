@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
+import { evaluate } from 'mathjs';
+
 function App() {
   
   let [expression, setExpression] = useState("");
@@ -12,7 +14,7 @@ function App() {
 
   let buttons = ["(", ")", "%", "AC", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"];
   let evaluateExpression = function(){
-      let evaluation = eval(expression);
+      let evaluation = evaluate(expression);
       setOldExpression(expression + "=");
       setExpression(String(evaluation));
       setPrev("ANS");
