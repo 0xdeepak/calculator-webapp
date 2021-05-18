@@ -62,77 +62,79 @@ function App() {
       justifyContent : "center",
       alignItems : "center",
     }}>
-      <div style={{
-      width : "450px",
-      height: "70px",
-      background : "#FF5E13",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: "0px 20px",
-      borderRadius: "10px",
-      overflow: "hidden"
-      }}>
-        <p style={{
-          fontSize: "40px",
-          color: "#ffffff",
-          fontWeight: "bold"
-        }}>CALCULATOR</p>
-      </div>
-      <div style={{
-      width : "450px",
-      background : "#ffffff",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-end",
-      justifyContent: "center",
-      padding: "20px",
-      marginTop: "20px",
-      marginBottom: "20px",
-      borderRadius: "10px",
-      overflow: "hidden"
-      }}>
-        <h3>{oldExpression}</h3>
-        <h1>{expression}</h1>
-      </div>
+      <div class="shrink">
+        <div style={{
+        width : "450px",
+        height: "70px",
+        background : "#FF5E13",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "0px 20px",
+        borderRadius: "10px",
+        overflow: "hidden"
+        }}>
+          <p style={{
+            fontSize: "40px",
+            color: "#ffffff",
+            fontWeight: "bold"
+          }}>CALCULATOR</p>
+        </div>
+        <div style={{
+        width : "450px",
+        background : "#ffffff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+        justifyContent: "center",
+        padding: "20px",
+        marginTop: "20px",
+        marginBottom: "20px",
+        borderRadius: "10px",
+        overflow: "hidden"
+        }}>
+          <h3>{oldExpression}</h3>
+          <h1>{expression}</h1>
+        </div>
 
-      <div style={{
-      width : "450px",
-      background : "#ffffff",
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "wrap",
-      alignItems: "flex-end",
-      justifyContent: "center",
-      padding: "20px",
-      borderRadius: "10px"
-      }}>
-        {buttons.map(function(buttonValue,index){
-          return <button style={{
-            fontSize: "18px",
-            width: "90px",
-            margin:"5px 10px",
-            padding: "4px 7px",
-            background: "#9999",
-            fontWeight: "bold",
-            borderRadius: "5px"
-          }} onClick={function(){
-            if(buttonValue === "="){
-              evaluateExpression();
-            }
-            else if(buttonValue === "AC" && expression.length >= 1){
-              setExpression(expression.slice(0,-1));
-              setPrev("DEL");
-            }
-            else if(operators.has(buttonValue)){
-              putOperator(buttonValue);
-            }
-            else if(numerics.has(buttonValue)){
-              putNumerics(buttonValue);
-            }
-          }}>{buttonValue}</button>
-        })}
+        <div style={{
+        width : "450px",
+        background : "#ffffff",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "flex-end",
+        justifyContent: "center",
+        padding: "20px",
+        borderRadius: "10px"
+        }}>
+          {buttons.map(function(buttonValue,index){
+            return <button style={{
+              fontSize: "18px",
+              width: "90px",
+              margin:"5px 10px",
+              padding: "4px 7px",
+              background: "#9999",
+              fontWeight: "bold",
+              borderRadius: "5px"
+            }} onClick={function(){
+              if(buttonValue === "="){
+                evaluateExpression();
+              }
+              else if(buttonValue === "AC" && expression.length >= 1){
+                setExpression(expression.slice(0,-1));
+                setPrev("DEL");
+              }
+              else if(operators.has(buttonValue)){
+                putOperator(buttonValue);
+              }
+              else if(numerics.has(buttonValue)){
+                putNumerics(buttonValue);
+              }
+            }}>{buttonValue}</button>
+          })}
+        </div>
       </div>
 
     </div>
