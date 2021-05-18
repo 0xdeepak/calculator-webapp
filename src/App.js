@@ -5,12 +5,13 @@ import { evaluate } from 'mathjs';
 
 function App() {
   
-  let [expression, setExpression] = useState("");
-  let [oldExpression, setOldExpression] = useState("");
+  let [expression, setExpression] = useState(" ");
+  let [oldExpression, setOldExpression] = useState(" ");
   let [prev, setPrev] = useState("ANS");
   
   let numerics = new Set("0123456789.");
   let operators = new Set("+-*/%");
+  let brackets = new Set("()");
 
   let buttons = ["(", ")", "%", "AC", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"];
   let evaluateExpression = function(){
@@ -28,13 +29,23 @@ function App() {
     setPrev("NUM");
   }
   let putOperator = function(value){
-    if(prev !== "OP"){
+    if(prev !== "OP" && value !== "("){
       setExpression(expression + value);
     }
     else {
       setExpression(expression.slice(0,-1) + value);
     }
     setPrev("OP");
+  }
+
+  let putBrackets = function(value){
+    if(value === "("){
+      setExpression(expression + value);
+    }
+    else if(prev === "NUM"){
+      setExpression(expression + value);
+    }
+    setPrev("BRAC");
   }
 
   let handleKeyUp = function(event){
@@ -81,8 +92,9 @@ function App() {
             fontWeight: "bold"
           }}>CALCULATOR</p>
         </div>
-        <div style={{
+        <div class= "screen" style={{
         width : "450px",
+        minHeight: "108px",
         background : "#ffffff",
         display: "flex",
         flexDirection: "column",
@@ -94,8 +106,8 @@ function App() {
         borderRadius: "10px",
         overflow: "hidden"
         }}>
-          <h3>{oldExpression}</h3>
-          <h1>{expression}</h1>
+          <h3 style={{ marginTop: "0px"}}>{oldExpression}</h3>
+          <h1 style={{ marginBottom: "0px"}}>{expression}</h1>
         </div>
 
         <div style={{
@@ -131,6 +143,9 @@ function App() {
               }
               else if(numerics.has(buttonValue)){
                 putNumerics(buttonValue);
+              }
+              else if(brackets.has(buttonValue)){
+                putBrackets(buttonValue);
               }
             }}>{buttonValue}</button>
           })}
